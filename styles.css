@@ -1,0 +1,29 @@
+#word{
+    width: 60%;
+    margin: 0 auto;
+    height: 20px;
+    text-align: center;
+}
+
+.letters{
+    background-color: black;
+    color: white;
+    width: 30px;
+    height: 30px;
+    font-size: 2em;
+    text-align: center;
+    display: inline-block;
+    
+    
+}
+
+#guessContainer{
+    width: 60%;
+    margin: 50px auto;
+    height: 20px;
+    text-align: center;
+}
+
+#guess, #guessBtn{
+    display: inline-block;
+}
