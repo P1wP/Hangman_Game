@@ -104,15 +104,9 @@ function lives(){
 
 // CHECK WIN
 function win(){
-    /*
-    TO DO !!!!!!!!!
-    
-    splitt correct and word into array
-    sort array in alphabaeticorder
-    comapre arrays to see if they match
-    */
-    let ar1 = correct.split("");
-    let ar2 = theWord.split("");
+ 
+    var ar1 = correct.split("");
+    var ar2 = theWord.split("");
     if(ar1.sort === ar2.sort && ar1.length === ar2.length){
         alert("WINNING");
         // START NEW GAME
@@ -121,7 +115,8 @@ function win(){
 }
 
 
-//RUN FUNCTION
+
+//START GAME
 randomWord();
 
 /* 
