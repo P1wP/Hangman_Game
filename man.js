@@ -111,7 +111,9 @@ function win(){
     sort array in alphabaeticorder
     comapre arrays to see if they match
     */
-    if(correct === theWord){
+    let ar1 = correct.split("");
+    let ar2 = theWord.split("");
+    if(ar1.sort === ar2.sort && ar1.length === ar2.length){
         alert("WINNING");
         // START NEW GAME
         location.reload();
