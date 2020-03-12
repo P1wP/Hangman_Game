@@ -4,19 +4,59 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	<title> Title </title>
+<meta http-equiv="Cache-Control" content="max-age=200" />
+<link rel = "stylesheet" href="styles.css">
+	<title> Hangman </title>
 </head>
 
 <body >
-    <h1>Hangman</h1>
+    <h1>HANGMAN</h1>
     
-    <div id="word">       </div>
-    <!--
-    <input id="letter">
-    <button id="btn">GUESS</button>
-    -->
-    <p id="wrong">Wrong Guesses:       </p>
+    <div id="word"><!-- RANDOM WORD--></div>
+
+    <p id="wrong">Wrong Guesses: <br></p>
     <p id="lives">Lives: 5</p>
+    
+    
+    <!-- Keyboard for mobile -->
+    <div id="keyboard">
+        <div id="rowOne" class="letters">
+            <span id="q" class="letter">Q</span>
+            <span id="w" class="letter">W</span>
+            <span id="e" class="letter">E</span>
+            <span id="r" class="letter">R</span>
+            <span id="t" class="letter">T</span>
+            <span id="y" class="letter">Y</span>
+            <span id="u" class="letter">U</span>
+            <span id="i" class="letter">I</span>
+            <span id="o" class="letter">O</span>
+            <span id="p" class="letter">P</span>
+        </div>
+        
+        <div id="rowTwo" class="letters">
+            <span id="a" class="letter">A</span>
+            <span id="s" class="letter">S</span>
+            <span id="d" class="letter">D</span>
+            <span id="f" class="letter">F</span>
+            <span id="g" class="letter">G</span>
+            <span id="h" class="letter">H</span>
+            <span id="j" class="letter">J</span>
+            <span id="k" class="letter">K</span>
+            <span id="l" class="letter">L</span>
+        </div>
+        
+        <div id="rowThree" class="letters">
+            <span id="z" class="letter">Z</span>
+            <span id="x" class="letter">X</span>
+            <span id="c" class="letter">C</span>
+            <span id="v" class="letter">V</span>
+            <span id="b" class="letter">B</span>
+            <span id="n" class="letter">N</span>
+            <span id="m" class="letter">M</span>
+
+        </div>
+    </div>
+    
     
     <script src="man.js"></script>
 </body>

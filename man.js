@@ -1,12 +1,31 @@
 // WORDS CHNAGE TO API IN FUTURE
-var words = ["COOL", "nice", "asshole", "Express", "victory"];
+var words = ["COOL", "nice", "JavaScript", "Express", "victory"];
+
+// WORD API
+/*fetch wordlist
+fetch("https://xkubist-random-word-v1.p.rapidapi.com/run.cgi", {
+  headers: {
+      "X-RapidAPI-Host": "xkubist-random-word-v1.p.rapidapi.com",
+      "X-Rapidapi-Key": "d7df31f2fbmsh700ac593d4561f6p16fd74jsn950f1e69cca8"
+  }
+}).then(function (result) {
+    return result.json();
+}).then(function(json){
+    console.log(json);
+    
+})
+*/
+
+//fetch wordlist
+
 
 //DOM ELEMENTS
 var domWord = document.getElementById("word");
-//var letter = document.getElementById("letter");
 var btn = document.getElementById("btn");
 var wrong = document.getElementById("wrong");
 var life = document.getElementById("lives");
+var keyboard = document.getElementById("keyboard");
+
 
 //CORRECT LETTERS
 var correct = [];
@@ -21,20 +40,51 @@ btn.addEventListener("click", guessLetter);
 // TEST KEYBOARD LETTER
 var letter = "";
 
+// GET KEY FROM ANDROID KEYBOARD
+if( /Android|iPad|iPhone|iPod /i.test(navigator.userAgent) ) {
+    //Show keyboard
+    keyboard.style.display = "block";
+    
+    var buttons = document.querySelectorAll(".letter");
+    for (var i = 0; i < buttons.length; i++) {
+        var self = buttons[i];
+
+        self.addEventListener('click', function (event) {  
+            // prevent browser's default action
+            event.preventDefault();
+
+            // call your awesome function here
+            MyAwesomeFunction(this); // 'this' refers to the current button on for loop
+        }, false);
+    }
+}
+else{
+    keyboard.style.display = "none";
+}// END ANDROIND KEYPRESS
+
+
+function MyAwesomeFunction(a){
+    console.log(a.id);
+    var keyPressedM = a.id.toUpperCase();
+    letter = keyPressedM;
+    guessLetter();
+}
+
+// GET PRESSED KEY
 document.addEventListener('keypress', logKey);
 
 function logKey(e) {
+    console.log(e);
     var aToZ = /[a-zA-Z]/;
     var keyPressed = e.key.toUpperCase();
     console.log(keyPressed);
+    
     if (aToZ.test(keyPressed)){
         letter = keyPressed;
         guessLetter();
     }
     
 }
-
-//FUNCTIONS
 
 //RANDOM WORD
 var theWord = "";
@@ -80,7 +130,9 @@ function correctLetter(){
         lives();
     }
     // SHOW WRONG GUESSES
-    wrong.innerHTML += wrongGuess.slice(-theWord.length + theWord.length - 1);
+    wrong.innerHTML += wrongGuess.slice(- theWord.length + theWord.length - 1);
+    
+    // CHECK WIN
     win();
 }
 
@@ -106,8 +158,11 @@ function lives(){
 function win(){
  
     var ar1 = correct.split("");
+    console.log("correct: "+ar1.sort());
     var ar2 = theWord.split("");
-    if(ar1.sort === ar2.sort && ar1.length === ar2.length){
+    console.log("WORD: "+ar2.sort());
+
+    if(ar1.sort() === ar2.sort() && ar1.length === ar2.length){
         alert("WINNING");
         // START NEW GAME
         location.reload();
@@ -120,6 +175,8 @@ function win(){
 randomWord();
 
 /* 
+
+IMPLEMENT VISUAL GRAPHICS
 IMAGES FOR HANGMAN
 
 -------------------LOSS---------------
