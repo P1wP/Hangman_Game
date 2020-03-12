@@ -80,7 +80,14 @@ function logKey(e) {
     console.log(keyPressed);
     
     if (aToZ.test(keyPressed)){
-        letter = keyPressed;
+        if(correct.includes(keyPressed)){
+            alert("You have tried this letter before");
+            return;
+        }
+        else{
+            letter = keyPressed;
+        }
+        
         guessLetter();
     }
     
@@ -157,12 +164,12 @@ function lives(){
 // CHECK WIN
 function win(){
  
-    var ar1 = correct.split("");
-    console.log("correct: "+ar1.sort());
-    var ar2 = theWord.split("");
-    console.log("WORD: "+ar2.sort());
+    var ar1 = correct.split("").sort();
+    console.log("correct: "+ar1);
+    var ar2 = theWord.split("").sort();
+    console.log("WORD: "+ar2);
 
-    if(ar1.sort() === ar2.sort() && ar1.length === ar2.length){
+    if(ar1.length === ar2.length){
         alert("WINNING");
         // START NEW GAME
         location.reload();
