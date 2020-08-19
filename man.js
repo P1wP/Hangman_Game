@@ -1,22 +1,6 @@
 // WORDS CHNAGE TO API IN FUTURE
-var words = ["COOL", "nice", "JavaScript", "Express", "victory"];
+var words = ["COOL+", "nice-", "JavaScript", "Express", "victory"];
 
-// WORD API
-/*fetch wordlist
-fetch("https://xkubist-random-word-v1.p.rapidapi.com/run.cgi", {
-  headers: {
-      "X-RapidAPI-Host": "xkubist-random-word-v1.p.rapidapi.com",
-      "X-Rapidapi-Key": "d7df31f2fbmsh700ac593d4561f6p16fd74jsn950f1e69cca8"
-  }
-}).then(function (result) {
-    return result.json();
-}).then(function(json){
-    console.log(json);
-    
-})
-*/
-
-//fetch wordlist
 
 
 //DOM ELEMENTS
@@ -94,18 +78,47 @@ function logKey(e) {
 }
 
 //RANDOM WORD
-var theWord = "";
-var word = Math.floor(Math.random() * words.length);
+//var word = Math.floor(Math.random() * words.length);
+var theWord;
 function randomWord(){
-    theWord = words[word].toUpperCase();
-    console.log(theWord); // TO BE REMOVED
-    
-    for ( var i = 0; i < theWord.length; i++){
-        domWord.innerHTML += "<span id=" + '"letter_' + i + '">_ </span>';
+    var word = "";
+    // WORD API
+    //fetch wordlist
+    fetch("https://wordsapiv1.p.rapidapi.com/words/?random=true", {
+	    "method": "GET",
+	    "headers": {
+		    "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
+		    "x-rapidapi-key": "d7df31f2fbmsh700ac593d4561f6p16fd74jsn950f1e69cca8"
     }
+    }).then(function (result) {
+        return result.json();
+    }).then(function(json){
+        console.log(json.word);
+        word = json.word;  
+    }).finally(function(){
+        console.log(word);
+    
+        var aToZ = /[a-zA-Z]/;
+        theWord = word.toUpperCase();
+    
+        for ( var i = 0; i < theWord.length; i++){
+            if(aToZ.test(theWord[i])){
+                domWord.innerHTML += "<span id=" + '"letter_' + i + '"> _ </span>';    
+            }
+            else if( theWord[i] === " "){
+                domWord.innerHTML += "<span id=" + '"letter_' + i + '"> + </span>';
+                
+            }
+            else{
+                domWord.innerHTML += "<span id=" + '"letter_' + i + '"> - </span>';
+            }  
+        }
+    })    
     var count = 5;
     life.innerHTML = "lives: " + count;
 }
+
+
 
 //GUESSED LETTER
 var allGuessed = "";
@@ -166,10 +179,21 @@ function win(){
  
     var ar1 = correct.split("").sort();
     console.log("correct: "+ar1);
-    var ar2 = theWord.split("").sort();
+
+    // REMOVE SPECIAL CHARACTER FROM THE WORD
+    var aToZ = /[a-zA-Z]/;
+    var noSpecialChar = "";
+    for(var i = 0; i < theWord.length; i++){
+        if(aToZ.test(theWord[i])){
+            noSpecialChar += theWord[i];
+        }
+        console.log( theWord , noSpecialChar)
+    }       
+    var ar2 = noSpecialChar.split("").sort();
     console.log("WORD: "+ar2);
 
     if(ar1.length === ar2.length){
+
         alert("WINNING");
         // START NEW GAME
         location.reload();
